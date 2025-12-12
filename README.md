@@ -10,7 +10,7 @@ Merge multiple simple WooCommerce products into one variable product with variat
 - ✅ Copy images, categories from source products
 - ✅ **Full product description** (min. 200 words for SEO)
 - ✅ **Short description** for cart display
-- ✅ **Warenkorb-Kurzbeschreibung** per variation
+- ✅ **Warenkorb-Kurzbeschreibung** per variation (`_mini_desc` für WooCommerce Germanized)
 - ✅ **SEO optimization** (Rank Math + Yoast)
   - Focus keyword
   - SEO title
@@ -193,6 +193,10 @@ Admin: https://example.com/wp-admin/post.php?post=61005&action=edit
 4. **Original products are set to draft by default**
 
 ## Changelog
+
+### v2.1.0 (2024-12-12)
+- **WooCommerce Germanized support**: `_mini_desc` field for cart descriptions
+- Fixed variation cart descriptions to work with German shops
 
 ### v2.0.0 (2024-12-12)
 - Added full product description support (min. 200 words)

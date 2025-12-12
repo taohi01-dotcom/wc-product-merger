@@ -396,6 +396,9 @@ class WC_Product_Merger {
             // Also set as post meta for compatibility
             update_post_meta($variation_id, '_variation_description', $cart_desc);
 
+            // WooCommerce Germanized: _mini_desc for cart short description
+            update_post_meta($variation_id, '_mini_desc', $cart_desc);
+
             $this->log("  ✅ Variation '{$source['variation_value']}' created (ID: $variation_id)");
             $this->log("     → Warenkorb-Beschreibung: " . substr($cart_desc, 0, 50) . "...");
         }
