@@ -6,7 +6,7 @@
  * Includes full SEO optimization, descriptions, tags, and image alt texts.
  *
  * @package     WC_Product_Merger
- * @version     2.0.0
+ * @version     2.2.0
  * @author      Klaus Arends / Claude AI
  * @license     GPL-2.0+
  *
@@ -144,7 +144,7 @@ class WC_Product_Merger {
     }
 
     public function run() {
-        $this->log("=== WooCommerce Product Merger v2.0 ===\n");
+        $this->log("=== WooCommerce Product Merger v2.2 ===\n");
 
         if ($this->config['options']['dry_run']) {
             $this->log("⚠️  DRY RUN MODE - No changes will be made\n");
@@ -352,6 +352,17 @@ class WC_Product_Merger {
     private function createVariations($parent_id, $source_products, $taxonomy) {
         $this->log("\n⏳ Creating variations...");
 
+        // First: Rename original SKUs to avoid conflicts
+        $this->log("  ⏳ Renaming original SKUs to avoid conflicts...");
+        foreach ($source_products as $source) {
+            $original = $source['product'];
+            $old_sku = $original->get_sku();
+            if ($old_sku && !$this->config['options']['dry_run']) {
+                $original->set_sku($old_sku . '-REPLACED');
+                $original->save();
+            }
+        }
+
         foreach ($source_products as $index => $source) {
             $original = $source['product'];
             $term_slug = sanitize_title($source['variation_value']);
@@ -370,8 +381,9 @@ class WC_Product_Merger {
                 $variation->set_sale_price($original->get_sale_price());
             }
 
-            // Keep original SKU (don't add -VAR suffix)
-            $variation->set_sku($original->get_sku());
+            // Use original SKU (without -REPLACED suffix)
+            $sku = str_replace('-REPLACED', '', $original->get_sku());
+            $variation->set_sku($sku);
             $variation->set_stock_status($original->get_stock_status());
             $variation->set_manage_stock($original->get_manage_stock());
 

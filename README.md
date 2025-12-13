@@ -194,6 +194,10 @@ Admin: https://example.com/wp-admin/post.php?post=61005&action=edit
 
 ## Changelog
 
+### v2.2.0 (2024-12-13)
+- **SKU conflict fix**: Automatically renames original SKUs before creating variations
+- Prevents "Duplicate SKU" errors when merging products
+
 ### v2.1.0 (2024-12-12)
 - **WooCommerce Germanized support**: `_mini_desc` field for cart descriptions
 - Fixed variation cart descriptions to work with German shops
