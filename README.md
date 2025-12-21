@@ -1,7 +1,13 @@
-# WooCommerce Product Merger v2.0
+# WooCommerce Product Merger v3.0
 
 Merge multiple simple WooCommerce products into one variable product with variations.
-**Now with full SEO optimization!**
+**Now with multi-attribute support and full SEO optimization!**
+
+## 🆕 New in v3.0
+
+- ✨ **Multi-Attribute Support** - Create products with 2+ attributes (e.g., Size + Flavor)
+- ✨ **Automatic attribute combinations** - Mix and match attributes for complex variations
+- ✨ **Enhanced documentation** - Better examples and use cases
 
 ## Features
 
@@ -114,6 +120,52 @@ $config = [
     ],
 ];
 ```
+
+## Multi-Attribute Support (v3.0)
+
+For products with **multiple varying attributes** (e.g., Size AND Flavor), use `merge-products-multi-attribute.php`:
+
+### Use Case
+
+**Before:**
+- KAS Orange 12x1L (Simple Product)
+- KAS Zitrone 12x1L (Simple Product)
+- KAS Orange 12x0,5L (Simple Product)
+- KAS Zitrone 12x0,5L (Simple Product)
+
+**After:**
+- KAS Limonade PET-Flaschen (Variable Product)
+  - Attribute 1: Größe (12x1L, 12x0,5L)
+  - Attribute 2: Geschmack (Orange, Zitrone)
+  - Total: 4 variations (all combinations)
+
+### Configuration
+
+```php
+'source_products' => [
+    [
+        'id' => 123,
+        'attributes' => [
+            'groesse' => '12x1L',      // Attribute 1
+            'geschmack' => 'Orange',   // Attribute 2
+        ],
+        'cart_description' => 'KAS Orange 1L - Description...',
+    ],
+    // ... more products with different attribute combinations
+],
+
+'attributes' => [
+    ['name' => 'Größe', 'slug' => 'groesse', 'visible' => true, 'variation' => true],
+    ['name' => 'Geschmack', 'slug' => 'geschmack', 'visible' => true, 'variation' => true],
+],
+```
+
+### When to Use Which Script
+
+| Script | Best For | Example |
+|--------|----------|---------|
+| `merge-products-to-variable.php` | 1 attribute | Pringles (only flavor varies) |
+| `merge-products-multi-attribute.php` | 2+ attributes | KAS (size + flavor vary) |
 
 ## SEO Checklist
 
